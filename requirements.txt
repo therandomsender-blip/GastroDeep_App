@@ -1,8 +1,8 @@
 streamlit
-tensorflow
+tensorflow-cpu
 numpy
 pandas
-Pillow
+pillow
 opencv-python-headless
 matplotlib
 scikit-learn
