@@ -19,15 +19,21 @@ st.markdown("""
     """, unsafe_allow_html=True)
 
 # --- 2. MODEL LOADING ---
+import os  # (Add this right here if it's not already at the very top of your file)
+
 @st.cache_resource
 def get_model():
-    return load_model('model/GastroDeep_Final_Model.h5')
+    # 1. Find the exact folder where this app.py file lives on the Linux server
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # 2. Build a bulletproof path to the model file
+    model_path = os.path.join(current_dir, 'model', 'GastroDeep_Final_Model.h5')
+    
+    # 3. Try to load it directly (no try/except) so we can see the raw error!
+    return load_model(model_path)
 
-try:
-    model = get_model()
-except Exception as e:
-    st.error("Model not found. Please ensure 'model/GastroDeep_Final_Model.h5' is in the directory.")
-    st.stop()
+# Call the function directly
+model = get_model()
 
 classes = ['dyed-lifted-polyps', 'dyed-resection-margins', 'esophagitis', 
            'normal-cecum', 'normal-pylorus', 'normal-z-line', 'polyps', 'ulcerative-colitis']
