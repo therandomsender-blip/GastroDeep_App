@@ -1,6 +1,6 @@
 streamlit
 tensorflow-cpu
-numpy
+numpy<2.0.0
 pandas
 pillow
 opencv-python-headless
